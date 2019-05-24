@@ -1,0 +1,48 @@
+.articles,
+.taxonomies {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+
+    .article,
+    .taxonomy {
+        flex-shrink: 0;
+        flex-grow: 0;
+        margin: 10px;
+        padding: 20px;
+        border: 1px solid #111;
+        border-right-color: #000;
+        border-bottom-color: #000;
+        list-style-type: none;
+        max-height: 320px;
+        overflow-y: auto;
+    }
+}
+.article {
+    flex-basis: calc(33% - 20px);
+    color: #FFF;
+    background-color: #333;
+}
+.taxonomy {
+    flex-basis: calc(50% - 20px);
+    color: #111;
+    background-color: #EFEFEF;
+
+    ul {
+        list-style-type: none;
+        margin: 0 0 20px 0;
+        padding: 0;
+        display: flex;
+        flex-flow: row wrap;
+
+        li {
+            margin: 1px;
+            padding: 8px 10px;
+            border: 1px solid #E0E0E0;
+            background-color: #FFF;
+            width: calc(50% - 2px);
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+    }
+}

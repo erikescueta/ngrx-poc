@@ -1,0 +1,13 @@
+<div class="results">
+  <article class="taxonomy" *ngIf="searchType === 'taxonomies' && searchResults">
+    <p><em>ID {{ searchResults.taxonomyId }}</em></p>
+    <h3>{{ searchResults.taxonomyName }}</h3>
+    <h4>{{ searchResults.businessStream }} &nbsp;|&nbsp; {{ searchResults.taxonomyType }}</h4>
+    <section>
+      <p>Descriptors:</p>
+      <ul>
+        <li *ngFor="let descriptor of searchResults.descriptor">{{ descriptor }}</li>
+      </ul>
+    </section>
+  </article>
+</div>

@@ -1,0 +1,117 @@
+/*
+    https://tobiasahlin.com/spinkit/
+*/
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin prefix($property, $value, $vendors: webkit moz ms o, $default: true) {
+  @if $vendors {
+    @each $vendor in $vendors {
+      #{"-" + $vendor + "-" + $property}: #{$value};
+    }
+  }
+  @if $default {
+    #{$property}: #{$value};
+  }
+}
+
+$bgcolor: #333;
+
+.loader {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.sk-cube-grid {
+	width: 80px;
+	height: 80px;
+	margin: auto;
+}
+
+.sk-cube-grid .sk-cube {
+	width: 33%;
+	height: 33%;
+	background-color: #333;
+	float: left;
+	animation: 
+		sk-cubeGridScaleDelay 1.5s infinite ease-in-out,
+		colors 15s infinite; 
+	background-image: url(/assets/logo.png);
+	background-size: auto 80px;
+	background-blend-mode: overlay;
+}
+.sk-cube-grid .sk-cube1 { 
+	@include prefix(animation-delay, 0.2s);
+	background-position: top left;
+}
+.sk-cube-grid .sk-cube2 { 
+	@include prefix(animation-delay, 0.3s); 
+	background-position: top center;
+}
+.sk-cube-grid .sk-cube3 { 
+	@include prefix(animation-delay, 0.4s); 
+	background-position: top right;
+}
+.sk-cube-grid .sk-cube4 { 
+	@include prefix(animation-delay, 0.1s); 
+	background-position: left center;
+}
+.sk-cube-grid .sk-cube5 { 
+	@include prefix(animation-delay, 0.2s); 
+	background-position: center center;
+}
+.sk-cube-grid .sk-cube6 { 
+	@include prefix(animation-delay, 0.3s); 
+	background-position: right center;
+}
+.sk-cube-grid .sk-cube7 { 
+	@include prefix(animation-delay, 0s); 
+	background-position: left bottom;
+}
+.sk-cube-grid .sk-cube8 { 
+	@include prefix(animation-delay, 0.1s); 
+	background-position: center bottom;
+}
+.sk-cube-grid .sk-cube9 { 
+	@include prefix(animation-delay, 0.2s); 
+	background-position: right bottom;
+}
+
+
+@include keyframes(sk-cubeGridScaleDelay) {
+	0%, 70%, 100% {
+		-webkit-transform: scale3D(1, 1, 1);
+						transform: scale3D(1, 1, 1);
+	} 35% {
+		-webkit-transform: scale3D(0, 0, 1);
+						transform: scale3D(0, 0, 1);
+	} 
+}
+
+@include keyframes(colors) {
+	0% { background-color: #FF5427; }
+	25% { background-color: #AE20AE; }
+	50% { background-color: #37C5F7; }
+  75% { background-color: #1CD164; }
+  100% { background-color: #FF5427; }
+}
