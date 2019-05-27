@@ -1,4 +1,4 @@
-<div class="loader" *ngIf="loading" [class]="loading === false ? 'remove' : ''">
+<div class="loader" [@loaderAnimation]="loading ? 'true' : 'false'" *ngIf="loading">
   <div class="sk-cube-grid">
     <div class="sk-cube sk-cube1"></div>
     <div class="sk-cube sk-cube2"></div>

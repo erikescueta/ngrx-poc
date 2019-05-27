@@ -39,13 +39,17 @@ $bgcolor: #333;
     display: flex;
     align-content: center;
     align-items: center;
-    justify-content: center;
+		justify-content: center;
+		animation: loader-in 0.6s 1 ease-in-out forwards;
+		@include prefix(box-shadow, 0px 0px 50px #EEE inset);
 }
 
 .sk-cube-grid {
 	width: 80px;
 	height: 80px;
 	margin: auto;
+	border: 2px solid #EEE;
+	background-color: #EEE;
 }
 
 .sk-cube-grid .sk-cube {
@@ -54,8 +58,8 @@ $bgcolor: #333;
 	background-color: #333;
 	float: left;
 	animation: 
-		sk-cubeGridScaleDelay 1.5s infinite ease-in-out,
-		colors 15s infinite; 
+		sk-cubeGridScaleDelay 2s infinite ease-in-out,
+		colors 5s infinite ease-out; 
 	background-image: url(/assets/logo.png);
 	background-size: auto 80px;
 	background-blend-mode: overlay;
@@ -99,10 +103,10 @@ $bgcolor: #333;
 
 
 @include keyframes(sk-cubeGridScaleDelay) {
-	0%, 70%, 100% {
+	0%, 50%, 75% {
 		-webkit-transform: scale3D(1, 1, 1);
 						transform: scale3D(1, 1, 1);
-	} 35% {
+	} 25% {
 		-webkit-transform: scale3D(0, 0, 1);
 						transform: scale3D(0, 0, 1);
 	} 
@@ -114,4 +118,9 @@ $bgcolor: #333;
 	50% { background-color: #37C5F7; }
   75% { background-color: #1CD164; }
   100% { background-color: #FF5427; }
+}
+
+@include keyframes(loader-in) {
+	0% { background-color: rgba(255, 255, 255, 1) }
+	100% { background-color: rgba(255, 255, 255, 0.9) }
 }

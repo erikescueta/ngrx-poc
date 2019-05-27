@@ -1,24 +1,31 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Form, FormControl } from '@angular/forms';
-import { Article, ArticleResult } from '../../../models/articles';
+// import { Article, ArticleResult } from '../../../models/articles';
+// import { FetchArticles } from '../../../actions/articles.actions';
 import { Taxonomy, TaxonomySearchResult } from '../../../models/taxonomies';
 import { Store } from '@ngrx/store';
-import { State, selectArticleList, selectTaxonomyList, searchTaxonomyList } from '../../../reducers';
-import { FetchArticles } from '../../../actions/articles.actions';
+import {
+  State,
+  fetchTaxonomyList,
+  searchTaxonomyList,
+  loadingTaxonomyList
+ } from '../../../reducers';
 import { FetchTaxonomies, SearchTaxonomies } from 'src/app/actions/taxonomies.actions';
+import { ReduxAnimation } from './../../../animations/redux.animations';
 
 @Component({
   selector: 'app-redux',
   templateUrl: './redux.component.html',
-  styleUrls: ['./redux.component.scss']
+  styleUrls: ['./redux.component.scss'],
+  animations: [ ReduxAnimation ]
 })
 export class ReduxComponent implements OnInit, OnDestroy {
 
-  public articles: Array<Article>;
+  // public articles: Array<Article>;
   public taxonomies: Array<Taxonomy>;
   public taxonomiesSearchResults: TaxonomySearchResult;
-  public loading: Observable<boolean>;
+  public loading = true;
 
   constructor(
     private store: Store<State>
@@ -30,14 +37,20 @@ export class ReduxComponent implements OnInit, OnDestroy {
     //   () => {console.log('Completed');}
     // );
 
-    this.store.select(selectTaxonomyList).subscribe(
-      response => { this.taxonomies = response; },
-      err => { console.log(err); },
+    this.store.select(fetchTaxonomyList).subscribe(
+      response => { this.taxonomies = response || ''; },
+      err =>  { console.log(err); },
       () => { console.log('Completed'); }
     );
 
     this.store.select(searchTaxonomyList).subscribe(
-      response => { this.taxonomiesSearchResults = response; },
+      response => { this.taxonomiesSearchResults = response || null; },
+      err =>  { console.log(err); },
+      () => { console.log('Completed'); }
+    );
+
+    this.store.select(loadingTaxonomyList).subscribe(
+      response => { this.loading = response || false; },
       err =>  { console.log(err); },
       () => { console.log('Completed'); }
     );
@@ -54,7 +67,15 @@ export class ReduxComponent implements OnInit, OnDestroy {
   }
 
   triggerSearch(searchTerms) {
-    this.store.dispatch(new SearchTaxonomies(searchTerms));
+    if(searchTerms !== null) {
+      this.store.dispatch(new SearchTaxonomies(searchTerms));
+    } else {
+      this.taxonomiesSearchResults = null;
+    }
+  }
+
+  submit($event) {
+    $event.preventDefault()
   }
 
 }

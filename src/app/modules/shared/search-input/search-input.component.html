@@ -1,3 +1,4 @@
 <label for="searchStateInput">Search for {{ searchType }}</label>
 <input id="searchStateInput" type="text" name="searchTerm" [(ngModel)]="searchTerms"  />
-<button class="btn btn-outline-primary" (click)="sendSearchTerms()">Search</button>
+<button class="btn btn-primary" (click)="sendSearchTerms()">Search</button>
+<button class="btn btn-warning" (click)="clearSearchTerms()" *ngIf="searchDone">Clear</button>

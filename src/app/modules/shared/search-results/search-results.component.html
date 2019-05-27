@@ -1,12 +1,16 @@
-<div class="results">
-  <article class="taxonomy" *ngIf="searchType === 'taxonomies' && searchResults">
+<div class="results" *ngIf="searchResults">
+  <article class="taxonomy" *ngIf="searchType === 'taxonomies'">
     <p><em>ID {{ searchResults.taxonomyId }}</em></p>
     <h3>{{ searchResults.taxonomyName }}</h3>
     <h4>{{ searchResults.businessStream }} &nbsp;|&nbsp; {{ searchResults.taxonomyType }}</h4>
     <section>
       <p>Descriptors:</p>
-      <ul>
-        <li *ngFor="let descriptor of searchResults.descriptor">{{ descriptor }}</li>
+      <ul *ngFor="let descriptor of searchResults.descriptor">
+        <li *ngFor="let item of descriptor.descriptor">
+          <ul *ngFor="let subitem of item.descriptor">
+            {{ subitem | json }}
+          </ul>
+        </li>
       </ul>
     </section>
   </article>

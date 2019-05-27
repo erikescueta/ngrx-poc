@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { LoaderComponent } from './loader/loader.component';
+import { PostItemComponent } from './post-item/post-item.component';
 
 @NgModule({
   declarations: [
     SearchInputComponent,
     SearchResultsComponent,
-    LoaderComponent
+    LoaderComponent,
+    PostItemComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { LoaderComponent } from './loader/loader.component';
   exports: [
     SearchInputComponent,
     SearchResultsComponent,
-    LoaderComponent
+    LoaderComponent,
+    PostItemComponent
   ]
 })
 export class SharedModule { }
