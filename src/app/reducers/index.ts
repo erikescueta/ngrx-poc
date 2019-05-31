@@ -6,16 +6,13 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { ArticlesState, articlesInitialState, articlesReducer } from './articles.reducer';
 import { TaxonomiesState, taxonomiesInitialState, taxonomiesReducer } from './taxonomies.reducer';
 
 export interface State {
-  articles: ArticlesState;
   taxonomies: TaxonomiesState;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  articles: articlesReducer,
   taxonomies: taxonomiesReducer
 };
 

@@ -12,9 +12,6 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 
-import { ArticlesEffects } from './effects/articles.effects';
-import { ArticlesService } from './services/articles.service';
-
 import { TaxonomiesEffects } from './effects/taxonomies.effects';
 import { TaxonomiesService } from './services/taxonomies.service';
 
@@ -41,12 +38,10 @@ import { SharedModule } from './modules/shared/shared.module';
       maxAge: 25, // Retains last 25 states
     }),
     EffectsModule.forRoot([
-      ArticlesEffects,
       TaxonomiesEffects
     ])
   ],
   providers: [
-    ArticlesService,
     TaxonomiesService
   ],
   bootstrap: [AppComponent]
