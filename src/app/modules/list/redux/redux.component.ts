@@ -1,8 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Form, FormControl } from '@angular/forms';
-// import { Article, ArticleResult } from '../../../models/articles';
-// import { FetchArticles } from '../../../actions/articles.actions';
 import { Taxonomy, TaxonomySearchResult } from '../../../models/taxonomies';
 import { Store } from '@ngrx/store';
 import {
@@ -22,7 +19,6 @@ import { ReduxAnimation } from './../../../animations/redux.animations';
 })
 export class ReduxComponent implements OnInit, OnDestroy {
 
-  // public articles: Array<Article>;
   public taxonomies: Array<Taxonomy>;
   public taxonomiesSearchResults: TaxonomySearchResult;
   public loading = true;
@@ -30,12 +26,6 @@ export class ReduxComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<State>
   ) {
-
-    // this.store.select(selectArticleList).subscribe(
-    //   response => {this.articles = response;},
-    //   err => {console.log(err);},
-    //   () => {console.log('Completed');}
-    // );
 
     this.store.select(fetchTaxonomyList).subscribe(
       response => { this.taxonomies = response || ''; },
@@ -58,13 +48,10 @@ export class ReduxComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
-    // this.store.dispatch(new FetchArticles());
     this.store.dispatch(new FetchTaxonomies());
   }
 
-  ngOnDestroy() {
-
-  }
+  ngOnDestroy() {}
 
   triggerSearch(searchTerms) {
     if(searchTerms !== null) {

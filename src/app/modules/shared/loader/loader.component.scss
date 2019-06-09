@@ -103,13 +103,14 @@ $bgcolor: #333;
 
 
 @include keyframes(sk-cubeGridScaleDelay) {
-	0%, 50%, 75% {
+	0%, 25%, 50%, 75% {
 		-webkit-transform: scale3D(1, 1, 1);
 						transform: scale3D(1, 1, 1);
-	} 25% {
-		-webkit-transform: scale3D(0, 0, 1);
-						transform: scale3D(0, 0, 1);
 	} 
+	// 25% {
+	// 	-webkit-transform: scale3D(0, 0, 1);
+	// 					transform: scale3D(0, 0, 1);
+	// } 
 }
 
 @include keyframes(colors) {

@@ -1,0 +1,51 @@
+.create {
+  display: none;
+}
+.taxonomies {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  margin: 20px 0;
+
+  .taxonomy {
+      flex: 0 0 50%;
+
+      &:nth-child(odd) {
+          padding: 0 5px 10px 0;
+      }
+
+      &:nth-child(even) {
+          padding: 0 0 10px 5px;
+      }
+  
+      .taxonomy__wrapper {
+          max-height: 500px;
+          overflow-y: auto;
+          color: #111;
+          background-color: #EFEFEF;
+          border: 1px solid #111;
+          border-right-color: #000;
+          border-bottom-color: #000;
+          list-style-type: none;
+          padding: 25px;
+
+          ul {
+              list-style-type: none;
+              margin: 0 0 20px 0;
+              padding: 0;
+              display: flex;
+              flex-flow: row wrap;
+      
+              li {
+                  margin: 1px;
+                  padding: 8px 10px;
+                  border: 1px solid #E0E0E0;
+                  background-color: #FFF;
+                  width: calc(50% - 2px);
+                  flex-shrink: 0;
+                  flex-grow: 0;
+              }
+          }
+      }
+  }
+}

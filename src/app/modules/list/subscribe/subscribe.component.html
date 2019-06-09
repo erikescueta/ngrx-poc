@@ -1,3 +1,41 @@
-<p>
-  subscribe works!
-</p>
+<app-loader [loading]="loading"></app-loader>
+
+<div class="redux">
+  <div class="row">
+    <div class="col-lg-6">
+        <div class="search" >
+          <app-search-input [searchType]="'taxonomies'" [searchDone]="taxonomiesSearchResults !== null"></app-search-input>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="create">
+          <app-post-item [createType]="'taxonomy'"></app-post-item>
+        </div>    
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="results" *ngIf="taxonomiesSearchResults" [@loadResults]="loading ? 'init' : 'end'">
+          <app-search-results [searchType]="'taxonomies'" [searchResults]="taxonomiesSearchResults"></app-search-results>
+      </div>
+      <div class="index" *ngIf="taxonomies && taxonomiesSearchResults === null" [@loadIndex]="loading ? 'init' : 'end'">
+        <div class="taxonomies">
+          <article class="taxonomy" *ngFor="let taxonomy of taxonomies">
+            <div class="taxonomy__wrapper">
+              <h6>Created {{ taxonomy.created }} &nbsp;|&nbsp; Updated {{ taxonomy.lastModified }}</h6>
+              <p><em>ID {{ taxonomy.taxonomyId }}</em></p>
+              <h3>{{ taxonomy.taxonomyName }}</h3>
+              <h4>{{ taxonomy.businessStream }} &nbsp;|&nbsp; {{ taxonomy.taxonomyType }}</h4>
+              <section>
+                <p>Descriptors:</p>
+                <ul>
+                  <li *ngFor="let descriptor of taxonomy.descriptorValues">{{ descriptor }}</li>
+                </ul>
+              </section>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

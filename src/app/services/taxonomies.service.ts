@@ -18,6 +18,6 @@ export class TaxonomiesService {
 
   fetchTaxonomies(): Observable<any> {
     const url = 'http://udccmap002:5000/taxonomies';
-    return this.http.get(url).pipe(catchError(error => throwError(error)));;
+    return this.http.get(url).pipe(catchError(error => throwError(error)));
   }
 }
