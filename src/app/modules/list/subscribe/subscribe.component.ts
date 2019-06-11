@@ -1,20 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { Form, FormControl } from '@angular/forms';
 import { Taxonomy, TaxonomySearchResult } from '../../../models/taxonomies';
-import { ReduxAnimation } from './../../../animations/redux.animations';
+import { SubscribeAnimation } from '../../../animations/subscribe.animation';
 import { TaxonomiesService } from './../../../services/taxonomies.service';
 
 @Component({
   selector: 'app-subscribe',
   templateUrl: './subscribe.component.html',
   styleUrls: ['./subscribe.component.scss'],
-  animations: [ ReduxAnimation ]
+  animations: [ SubscribeAnimation ]
 })
 export class SubscribeComponent implements OnInit, OnDestroy {
+  @Output() searchResults = new EventEmitter();
 
-  public taxonomies: Observable<Taxonomy[]>;
-  public taxonomiesSearchResults: Observable<TaxonomySearchResult>;
+  public taxonomies: Array<Taxonomy> = null;
+  public taxonomiesSearchResults: TaxonomySearchResult = null;
   public taxonomiesSearchId: number;
   public loading = true;
   private subscriptions: Subscription[] = [];
@@ -36,6 +37,7 @@ export class SubscribeComponent implements OnInit, OnDestroy {
       this.taxonomiesService.fetchTaxonomies().subscribe(
         response => {
           this.taxonomies = response;
+          this.loading = false;
         },
         error => {
           // console.log(error)
@@ -44,17 +46,6 @@ export class SubscribeComponent implements OnInit, OnDestroy {
           // console.log('Completed')
         }
       ),
-      this.taxonomiesService.searchTaxonomies(this.taxonomiesSearchId).subscribe(
-        response => {
-          this.taxonomiesSearchResults = response;
-        },
-        error => {
-          // console.log(error)
-        },
-        () => {
-          // console.log('Completed')
-        }
-      )
     );
   }
 
@@ -63,6 +54,19 @@ export class SubscribeComponent implements OnInit, OnDestroy {
       this.subscriptions.map(subscription =>
         subscription.unsubscribe()
       );
+    }
+  }
+
+  triggerSearch(searchTerms) {
+    if (searchTerms !== null) {
+      this.taxonomiesService.searchTaxonomies(searchTerms).subscribe(
+        results => {
+          this.taxonomiesSearchResults = results;
+          this.searchResults.emit(this.taxonomiesSearchResults);
+        }
+      );
+    } else {
+      this.taxonomiesSearchResults = null;
     }
   }
 

@@ -1,10 +1,10 @@
 <app-loader [loading]="loading"></app-loader>
 
-<div class="redux">
+<div class="subscribe">
   <div class="row">
     <div class="col-lg-6">
         <div class="search" >
-          <app-search-input [searchType]="'taxonomies'" [searchDone]="taxonomiesSearchResults !== null"></app-search-input>
+          <app-search-input [searchType]="'taxonomies'" (searchForResults)="triggerSearch($event)" [searchDone]="taxonomiesSearchResults !== null"></app-search-input>
         </div>
     </div>
     <div class="col-lg-6">
@@ -18,7 +18,7 @@
       <div class="results" *ngIf="taxonomiesSearchResults" [@loadResults]="loading ? 'init' : 'end'">
           <app-search-results [searchType]="'taxonomies'" [searchResults]="taxonomiesSearchResults"></app-search-results>
       </div>
-      <div class="index" *ngIf="taxonomies && taxonomiesSearchResults === null" [@loadIndex]="loading ? 'init' : 'end'">
+      <div class="index" *ngIf="taxonomies !== null && taxonomiesSearchResults === null" [@loadIndex]="loading ? 'init' : 'end'">
         <div class="taxonomies">
           <article class="taxonomy" *ngFor="let taxonomy of taxonomies">
             <div class="taxonomy__wrapper">

@@ -9,7 +9,7 @@ import {
   loadingTaxonomyList
  } from '../../../reducers';
 import { FetchTaxonomies, SearchTaxonomies } from 'src/app/actions/taxonomies.actions';
-import { ReduxAnimation } from './../../../animations/redux.animations';
+import { ReduxAnimation } from '../../../animations/redux.animation';
 
 @Component({
   selector: 'app-redux',
