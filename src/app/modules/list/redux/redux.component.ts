@@ -54,7 +54,7 @@ export class ReduxComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
   triggerSearch(searchTerms) {
-    if(searchTerms !== null) {
+    if (searchTerms !== null) {
       this.store.dispatch(new SearchTaxonomies(searchTerms));
     } else {
       this.taxonomiesSearchResults = null;
@@ -62,7 +62,7 @@ export class ReduxComponent implements OnInit, OnDestroy {
   }
 
   submit($event) {
-    $event.preventDefault()
+    $event.preventDefault ();
   }
 
 }

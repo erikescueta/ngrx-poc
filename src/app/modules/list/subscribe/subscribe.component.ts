@@ -3,7 +3,7 @@ import { Observable, of, Subscription } from 'rxjs';
 import { Form, FormControl } from '@angular/forms';
 import { Taxonomy, TaxonomySearchResult } from '../../../models/taxonomies';
 import { ReduxAnimation } from './../../../animations/redux.animations';
-import { TaxonomiesService} from './../../../services/taxonomies.service';
+import { TaxonomiesService } from './../../../services/taxonomies.service';
 
 @Component({
   selector: 'app-subscribe',
