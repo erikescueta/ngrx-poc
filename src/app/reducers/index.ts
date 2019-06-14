@@ -29,3 +29,5 @@ export const fetchTaxonomyList = createSelector(selectTaxonomiesListState, (stat
 export const searchTaxonomyList = createSelector(selectTaxonomiesListState, (state: TaxonomiesState) => state.searchResult);
 
 export const loadingTaxonomyList = createSelector(selectTaxonomiesListState, (state: TaxonomiesState) => state.loading);
+
+export const addTaxonomy = createSelector(selectTaxonomiesListState, (state: TaxonomiesState) => state.newTaxonomy);

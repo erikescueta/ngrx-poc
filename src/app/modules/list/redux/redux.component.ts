@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Form, FormControl } from '@angular/forms';
 import { Taxonomy, TaxonomySearchResult } from '../../../models/taxonomies';
 import { Store } from '@ngrx/store';
@@ -22,36 +23,48 @@ export class ReduxComponent implements OnInit, OnDestroy {
   public taxonomies: Array<Taxonomy>;
   public taxonomiesSearchResults: TaxonomySearchResult;
   public loading = true;
+  private storeSubscriptions: Subscription[] = [];
 
   constructor(
     private store: Store<State>
-  ) {
-
-    this.store.select(fetchTaxonomyList).subscribe(
-      response => { this.taxonomies = response || ''; },
-      err =>  { console.log(err); },
-      () => { console.log('Completed'); }
-    );
-
-    this.store.select(searchTaxonomyList).subscribe(
-      response => { this.taxonomiesSearchResults = response || null; },
-      err =>  { console.log(err); },
-      () => { console.log('Completed'); }
-    );
-
-    this.store.select(loadingTaxonomyList).subscribe(
-      response => { this.loading = response || false; },
-      err =>  { console.log(err); },
-      () => { console.log('Completed'); }
-    );
-
-   }
+  ) {}
 
   ngOnInit() {
+    this.addStoreSubscriptions();
     this.store.dispatch(new FetchTaxonomies());
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.removeStoreSubscriptions();
+  }
+
+  addStoreSubscriptions(): void {
+    this.storeSubscriptions.push(
+      this.store.select(fetchTaxonomyList).subscribe(
+        response => { this.taxonomies = response || ''; },
+        err =>  { console.log(err); },
+        () => { console.log('Completed'); }
+      ),
+      this.store.select(searchTaxonomyList).subscribe(
+        response => { this.taxonomiesSearchResults = response || null; },
+        err =>  { console.log(err); },
+        () => { console.log('Completed'); }
+      ),
+      this.store.select(loadingTaxonomyList).subscribe(
+        response => { this.loading = response || false; },
+        err =>  { console.log(err); },
+        () => { console.log('Completed'); }
+      )
+    );
+  }
+
+  removeStoreSubscriptions(): void {
+    if (this.storeSubscriptions) {
+      this.storeSubscriptions.map(subscription =>
+        subscription.unsubscribe()
+      );
+    }
+  }
 
   triggerSearch(searchTerms) {
     if (searchTerms !== null) {

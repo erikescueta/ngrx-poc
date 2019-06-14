@@ -1,2 +1,20 @@
-<label for="postItemLauncher">Create a new {{ createType }}</label>
-<button id="postItemLauncher" class="btn btn-primary" (click)="openCreateForm()">Open form</button>
+<label for="postItemLauncher">Post a new {{ createType }}</label>
+<button id="postItemLauncher" class="btn btn-primary" (click)="postNow()">Post now</button>
+
+<ng-template #newTaxonomyModal>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">You've successully posted a Taxonomy!</h4>
+        <p>See below for more information:</p>
+    </div>            
+    <div class="modal-body">
+        {{ postedTaxonomy }}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="successCallback()">
+            OK
+        </button>
+    </div>
+</ng-template>

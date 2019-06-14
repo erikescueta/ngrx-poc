@@ -4,15 +4,20 @@ label {
 }
 
 input {
-    width: calc(100% - 162px);
+    width: calc(100% - 150px);
     max-width: 480px;
     padding: 5px 8px;
 }
 
 button {
-    width: 80px;
+    width: 72px;
     padding: 6px 12px;
     vertical-align: baseline;
     border-radius: 0rem;
-    margin-left: 1px;
+    margin-left: 3px;
+
+    &:focus,
+    &:active:focus {
+        box-shadow: none;
+    }
 }

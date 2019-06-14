@@ -5,12 +5,26 @@
     <h4>{{ searchResults.businessStream }} &nbsp;|&nbsp; {{ searchResults.taxonomyType }}</h4>
     <section>
       <p>Descriptors:</p>
-      <ul *ngFor="let descriptor of searchResults.descriptor">
-        <li *ngFor="let item of descriptor.descriptor">
-          <ul *ngFor="let subitem of item.descriptor">
-            {{ subitem | json }}
-          </ul>
-        </li>
+      <ul>
+        <li>Descriptor ID: {{ searchResults.descriptor[0].descriptorId}}</li>
+        <li>Descriptor Value: {{ searchResults.descriptor[0].descriptorValue }}</li>
+        <li>Invalidated By: {{ searchResults.descriptor[0].invalidatedBy }}</li>
+        <li>Is Valid?: {{ searchResults.descriptor[0].isValid }}</li>
+        <li>Parent ID: {{ searchResults.descriptor[0].parentID }}</li> 
+        <li>Taxonomy ID: {{ searchResults.descriptor[0].taxonomyID }}</li>
+        <li>Sequence: {{ searchResults.descriptor[0].sequence }}</li>
+        <li>Sequence: {{ searchResults.descriptor[0].leaf }}</li>
+
+        <ul *ngFor="let descriptor of searchResults.descriptor[0].descriptor">
+          <li>Descriptor ID: {{ descriptor.descriptorId }}</li>
+          <li>Descriptor Value: {{ descriptor.descriptorValue }}</li>
+          <li>Invalidated By: {{ descriptor.invalidatedBy }}</li>
+          <li>Is Valid?: {{ descriptor.isValid }}</li>
+          <li>Parent ID: {{ descriptor.parentID }}</li> 
+          <li>Taxonomy ID: {{ descriptor.taxonomyID }}</li>
+          <li>Sequence: {{ descriptor.sequence }}</li>
+          <li>Sequence: {{ descriptor.leaf }}</li>
+        </ul>
       </ul>
     </section>
   </article>
